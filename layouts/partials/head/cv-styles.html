@@ -1,0 +1,13 @@
+
+{{ if .Site.IsServer }}
+  {{ $screen := resources.Get "css/cv-screen.css" }}
+  <link rel="stylesheet" href="{{ $screen.RelPermalink }}" media="screen">
+  {{ $print := resources.Get "css/cv-print.css" }}
+  <link rel="stylesheet" href="{{ $print.RelPermalink }}" media="print">
+{{ else }}
+  {{ $screen := resources.Get "css/ccv-screnn.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $screen.RelPermalink }}" integrity="{{ $screen.Data.Integrity }}" crossorigin="anonymous" media="screen" />
+  {{ $print := resources.Get "css/ccv-print.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $print.RelPermalink }}" integrity="{{ $print.Data.Integrity }}" crossorigin="anonymous" media="print" />
+{{ end }}
+
